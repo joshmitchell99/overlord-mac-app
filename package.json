@@ -1,0 +1,68 @@
+{
+  "name": "overlord-mac-react",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron-main/main.cjs",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && ELECTRON_RUN_AS_NODE= electron .\"",
+    "build": "vite build && electron-builder",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.2",
+    "electron-updater": "^6.3.0",
+    "firebase": "^11.0.0",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^3.8.1",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.0.0",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "app.forfeit.overlord-react",
+    "productName": "Overlord",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ],
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extraResources": [
+        {
+          "from": "native",
+          "to": "native",
+          "filter": [
+            "app-monitor",
+            "overlay-host",
+            "screen-capture",
+            "nsfw-scan"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "Overlord"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "your-org",
+      "repo": "overlord-mac-react"
+    }
+  }
+}
