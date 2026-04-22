@@ -6,3 +6,8 @@ out/
 .env
 .env.local
 *.log
+
+# Override parent overlord-mac-app/.gitignore which ignores build/ for Xcode -
+# our build/ holds electron-builder source assets (entitlements, icon).
+!build/
+!build/**

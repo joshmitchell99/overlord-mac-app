@@ -33,16 +33,28 @@
     "wait-on": "^8.0.1"
   },
   "build": {
-    "appId": "app.forfeit.overlord-react",
+    "appId": "app.forfeit.OverlordMacScreenUtil",
     "productName": "Overlord",
+    "afterSign": "scripts/afterSign.cjs",
     "mac": {
       "category": "public.app-category.productivity",
       "target": [
         "dmg"
       ],
       "hardenedRuntime": true,
+      "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
       "entitlementsInherit": "build/entitlements.mac.plist",
+      "notarize": {
+        "teamId": "A2CJRG8KKK"
+      },
+      "extendInfo": {
+        "NSScreenCaptureUsageDescription": "Overlord needs to record your screen to track productivity sessions and help you review your work patterns.",
+        "NSAppleEventsUsageDescription": "Overlord uses AppleEvents to read the active browser tab so it can block specific websites.",
+        "NSAccessibilityUsageDescription": "Overlord uses Accessibility to read browser URLs so blocking rules can target specific sites.",
+        "LSUIElement": true,
+        "CFBundleDisplayName": "Overlord"
+      },
       "extraResources": [
         {
           "from": "native",
@@ -57,12 +69,22 @@
       ]
     },
     "dmg": {
-      "title": "Overlord"
+      "title": "Overlord ${version}",
+      "icon": "build/icon.icns",
+      "iconSize": 100,
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        { "x": 140, "y": 200, "type": "file" },
+        { "x": 400, "y": 200, "type": "link", "path": "/Applications" }
+      ]
     },
     "publish": {
       "provider": "github",
-      "owner": "your-org",
-      "repo": "overlord-mac-react"
+      "owner": "joshmitchell99",
+      "repo": "overlord-mac-app"
     }
   }
 }

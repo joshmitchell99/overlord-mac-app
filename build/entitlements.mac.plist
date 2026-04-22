@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- V8's JIT under hardened runtime -->
+  <key>com.apple.security.cs.allow-jit</key>
+  <true/>
+  <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+  <true/>
+
+  <!-- Needed to run the Swift helper binaries (app-monitor, overlay-host,
+       nsfw-scan, screen-capture) out of the app's Resources folder -->
+  <key>com.apple.security.cs.disable-library-validation</key>
+  <true/>
+
+  <!-- AppleEvents for reading browser tab state (URL tracking) -->
+  <key>com.apple.security.automation.apple-events</key>
+  <true/>
+
+  <!-- Outbound network (Firebase, server, remote logs) -->
+  <key>com.apple.security.network.client</key>
+  <true/>
+
+  <!-- Screen recording (explicit - TCC prompt still gates it at runtime) -->
+  <key>com.apple.security.screen-recording</key>
+  <true/>
+
+  <!-- REQUIRED for SCSensitivityAnalyzer to return non-disabled policy.
+       Without this entitlement the nsfw-scan binary will report 'skipped'
+       even when the user has Sensitive Content Warning enabled in System
+       Settings. Must also be enabled as a capability on the Apple Dev team. -->
+  <key>com.apple.developer.sensitivecontentanalysis.client</key>
+  <array>
+    <string>analysis</string>
+  </array>
+</dict>
+</plist>

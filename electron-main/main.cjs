@@ -3,6 +3,11 @@ const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
 
+// Override the process name in dev mode so menus, Activity Monitor, and the
+// tray tooltip show "Overlord" instead of "Electron". In packaged builds
+// this is set automatically from build.productName in package.json.
+app.setName('Overlord')
+
 // Auto-updater (only available in production builds)
 let autoUpdater = null
 if (!app.isPackaged) {
